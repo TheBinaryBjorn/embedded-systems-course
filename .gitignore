@@ -1,0 +1,15 @@
+# Quartus temporary files
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+hc_output/
+*.rpt
+*.summary
+*.smsg
+*.jdi
+*.pin
+*.done
+*.qws
+*.bak

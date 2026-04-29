@@ -1,16 +1,16 @@
 --------------------- Title ---------------------
 -- Project Name: hw1
--- File Name: test_item_presence_logic
+-- File Name: item_presence_logic_TB
 -- Author: Daniel Feldman
 -- Ver: 0.0.1
 -- Created Date: 27/04/2026
 -------------------------------------------------
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.all;
-ENTITY test_item_presence_logic IS
-END test_item_presence_logic;
+ENTITY item_presence_logic_TB IS
+END item_presence_logic_TB;
 
-ARCHITECTURE behavior OF test_item_presence_logic IS
+ARCHITECTURE behavior OF item_presence_logic_TB IS
 	COMPONENT item_presence_logic
 		GENERIC(K: POSITIVE:=3);
 		PORT(
@@ -27,7 +27,9 @@ ARCHITECTURE behavior OF test_item_presence_logic IS
 	SIGNAL S_rst : std_logic := '0';
 	SIGNAL S_ir_sensor : std_logic := '0';
 	SIGNAL S_weight_sensor : std_logic := '0';
-	SIGNAL S_ir_clean, S_weight_clean, S_item_present : std_logic;
+	SIGNAL S_ir_clean : std_logic:= '0';
+	SIGNAL S_weight_clean : std_logic := '0';
+	SIGNAL S_item_present : std_logic := '0';
 BEGIN
 	DUT: item_presence_logic
 	GENERIC MAP(K=>3)

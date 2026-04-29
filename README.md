@@ -13,4 +13,4 @@ This is our final project for the Embedded Systems course. We are pushing silico
   
 ## 🛠️ How to get started
 ```bash
-git clone [https://github.com/your-username/embedded-repo.git](https://github.com/your-username/embedded-repo.git)
+git clone https://github.com/TheBinaryBjorn/embedded-systems-course.git

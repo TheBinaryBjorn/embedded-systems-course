@@ -1,6 +1,6 @@
 --------------------- HW1 ---------------------
 -- Project Name: hw1
--- File Name: type_decoder
+-- File Name: type_decoder_TB.vhd
 -- Author: Daniel Feldman
 -- Ver: 0.0.1
 -- Created Date: 29/04/2026

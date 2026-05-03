@@ -1,6 +1,6 @@
---------------------- Title ---------------------
+--------------------- hw1 ---------------------
 -- Project Name: hw1
--- File Name: item_presence_logic
+-- File Name: item_presence_logic.vhd
 -- Author: Daniel Feldman
 -- Ver: 0.0.1
 -- Created Date: 27/04/2026

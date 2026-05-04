@@ -41,6 +41,9 @@ ARCHITECTURE behavior OF item_presence_logic IS
 				IF ir_sensor = '1' THEN
 					IF ir_cnt < K THEN
 						ir_cnt := ir_cnt + 1;
+						if ir_cnt = k THEN
+							ir_clean_tmp := '1';
+						END IF;
 					ELSE
 						ir_clean_tmp := '1';
 					END IF;	
@@ -53,6 +56,9 @@ ARCHITECTURE behavior OF item_presence_logic IS
 				IF weight_sensor = '1' THEN
 					IF weight_cnt < K THEN
 						weight_cnt := weight_cnt + 1;
+						IF weight_cnt = K THEN
+							weight_clean_tmp := '1';
+						END IF;
 					ELSE
 						weight_clean_tmp := '1';
 					END IF;

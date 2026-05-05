@@ -29,5 +29,58 @@ BEGIN
 		target_code => S_target_code,
 		valid_item => S_valid_item
 	);
-	S_item_type <= "00", "01" AFTER 50ns, "10" AFTER 100ns, "11" AFTER 150ns, ('L','L') after 200ns, ('W','W') after 250ns;
+
+	PROCESS
+	BEGIN
+		-- target_code: LEFT = 00, RIGHT = 01, FAIL = 10
+		
+		-- TC1: S_item_type = "00"
+		-- Expected: S_target_code = "00", S_valid_item = '1'
+		S_item_type <= "00";
+		WAIT FOR 10 ns;
+		
+		ASSERT (S_target_code = "00" AND S_valid_item = '1')
+		REPORT "TC1 Failed: Expected: S_target_code = 00, S_valid_item = 1"
+		SEVERITY ERROR;
+		
+		-- TC2: S_item_type = "01"
+		-- Expected: S_target_code = "01", S_valid_item = '1'
+		S_item_type <= "01";
+		WAIT FOR 10 ns;
+		
+		ASSERT (S_target_code = "01" AND S_valid_item = '1')
+		REPORT "TC2 Failed: Expected: S_target_code = 01, S_valid_item = '1'"
+		SEVERITY ERROR;
+		
+		-- TC3: S_item_type = "10"
+		-- Expected: S_target_code = "01", S_valid_item = '1'
+		S_item_type <= "10";
+		WAIT FOR 10 ns;
+		
+		ASSERT (S_target_code = "01" AND S_valid_item = '1')
+		REPORT "TC3 Failed: Expected: S_target_code = 01, S_valid_item = '1'"
+		SEVERITY ERROR;
+		
+		-- TC4: S_item_type = "11"
+		-- Expected: S_target_code = "10", S_valid_item = '0'
+		S_item_type <= "11";
+		WAIT FOR 10 ns;
+		
+		ASSERT (S_target_code = "10" AND S_valid_item = '0')
+		REPORT "TC4 Failed: Expected: S_target_code = 10, S_valid_item = '0'"
+		SEVERITY ERROR;
+		
+		-- TC5: S_item_type = "LL"
+		-- Expected: S_target_code = "10", S_valid_item = '0'
+		S_item_type <= "LL";
+		WAIT FOR 10 ns;
+		
+		ASSERT (S_target_code = "10" AND S_valid_item = '0')
+		REPORT "TC5 Failed: Expected: S_target_code = 10, S_valid_item = '0'"
+		SEVERITY ERROR;
+		
+		REPORT "Test Simulation Complete, check console above for any ERROR messages."
+		SEVERITY NOTE;
+		WAIT;
+	END PROCESS;
 END behavior;

@@ -30,6 +30,8 @@ ARCHITECTURE behavior OF item_presence_logic_TB IS
 	SIGNAL S_ir_clean : std_logic:= '0';
 	SIGNAL S_weight_clean : std_logic := '0';
 	SIGNAL S_item_present : std_logic := '0';
+	
+	CONSTANT clk_period : time := 20ns;
 BEGIN
 	DUT: item_presence_logic
 	GENERIC MAP(K=>3)
@@ -42,9 +44,111 @@ BEGIN
 		weight_clean => S_weight_clean,
 		item_present => S_item_present
 	);
-	S_clk <= NOT S_clk AFTER 10ns;
-	S_ir_sensor <= '0', '1' after 30ns, '0' after 60ns, '1' after 90ns;
-	S_weight_sensor <= '0', '1' after 60ns, '0' after 200ns;
-	S_rst <= '1' after 500ns;
+	S_clk <= NOT S_clk AFTER clk_period / 2;
+	
+	PROCESS
+	BEGIN
+		-- System Reset
+		S_rst <= '1';
+		S_ir_sensor <= '0';
+		S_weight_sensor <= '0';
+		WAIT FOR clk_period*2;
+		
+		S_rst <= '0';
+		WAIT FOR clk_period*2;
+		
+		-- Reset Off
+		-- Test Case 1: Both Sensors Off, Reset Off
+		S_ir_sensor <= '0';
+		S_weight_sensor <= '0';
+		S_rst <= '0';
+		WAIT FOR clk_period*3;
+		
+		ASSERT (S_ir_clean = '0' AND S_weight_clean = '0' AND S_item_present = '0')
+		REPORT "TC1 Failed: Expected all outputs to be 0."
+		SEVERITY ERROR;
+		
+		-- Test Case 2: IR Sensor On, Weight Sensor Off, Reset Off
+		S_ir_sensor <= '1';
+		S_weight_sensor <= '0';
+		S_rst <= '0';
+		
+		WAIT FOR clk_period*3;
+		
+		ASSERT(S_ir_clean = '1' AND S_weight_clean = '0' AND S_item_present = '0')
+		REPORT "TC2 Failed: Expected S_ir_clean='1', S_weight_clean = '0', S_item_present = '0'"
+		SEVERITY ERROR;
+		
+		-- Test Case 3: IR Sensor Off, Weight Sensor On, Reset Off
+		S_ir_sensor <= '0';
+		S_weight_sensor <= '1';
+		S_rst <= '0';
+		
+		WAIT FOR clk_period*3;
+		
+		ASSERT(S_ir_clean = '0' AND S_weight_clean = '1' AND S_item_present = '0')
+		REPORT "TC3 Failed: Expected S_ir_clean='0', S_weight_clean = '1', S_item_present = '0'"
+		SEVERITY ERROR;
+		
+		-- Test Case 4: Both Sensors On, Reset Off
+		S_ir_sensor <= '1';
+		S_weight_sensor <= '1';
+		S_rst <= '0';
+		
+		WAIT FOR clk_period*3;
+		
+		ASSERT(S_ir_clean = '1' AND S_weight_clean = '1' AND S_item_present = '1')
+		REPORT "TC4 Failed: Expected S_ir_clean='1', S_weight_clean = '1', S_item_present = '1'"
+		SEVERITY ERROR;
+		
+		-- Reset On
+		-- Test Case 5: Both Sensors Off, Reset On
+		S_ir_sensor <= '0';
+		S_weight_sensor <= '0';
+		S_rst <= '1';
+		WAIT FOR clk_period*3;
+		
+		ASSERT (S_ir_clean = '0' AND S_weight_clean = '0' AND S_item_present = '0')
+		REPORT "TC5 Failed: Expected all outputs to be 0."
+		SEVERITY ERROR;
+		
+		-- Test Case 6: IR Sensor On, Weight Sensor Off, Reset On
+		S_ir_sensor <= '1';
+		S_weight_sensor <= '0';
+		S_rst <= '1';
+		
+		WAIT FOR clk_period*3;
+		
+		ASSERT(S_ir_clean = '0' AND S_weight_clean = '0' AND S_item_present = '0')
+		REPORT "TC6 Failed: Expected S_ir_clean='0', S_weight_clean = '0', S_item_present = '0'"
+		SEVERITY ERROR;
+		
+		-- Test Case 7: IR Sensor Off, Weight Sensor On, Reset On
+		S_ir_sensor <= '0';
+		S_weight_sensor <= '1';
+		S_rst <= '1';
+		
+		WAIT FOR clk_period*3;
+		
+		ASSERT(S_ir_clean = '0' AND S_weight_clean = '0' AND S_item_present = '0')
+		REPORT "TC7 Failed: Expected S_ir_clean='0', S_weight_clean = '0', S_item_present = '0'"
+		SEVERITY ERROR;
+		
+		-- Test Case 8: Both Sensors On, Reset On
+		S_ir_sensor <= '1';
+		S_weight_sensor <= '1';
+		S_rst <= '1';
+		
+		WAIT FOR clk_period*3;
+		
+		ASSERT(S_ir_clean = '0' AND S_weight_clean = '0' AND S_item_present = '0')
+		REPORT "TC8 Failed: Expected S_ir_clean='0', S_weight_clean = '0', S_item_present = '0'"
+		SEVERITY ERROR;
+		
+		REPORT "Test Simulation Complete, check console above for any ERROR messages."
+		SEVERITY NOTE;
+		WAIT;
+		
+	END PROCESS;
 
 END behavior;

@@ -24,7 +24,7 @@ ARCHITECTURE behavior of path_selector IS
 BEGIN
 	PROCESS(target_code, left_free, right_free)
 	BEGIN
-		-- Check left
+		-- Check left: 00
 		IF target_code = "00" THEN
 			go_left <= '1';
 			go_right <= '0';
@@ -35,8 +35,8 @@ BEGIN
 				can_sort <= '0';
 			END IF;
 		
-		-- Check Right
-		ELSIF target_code = "01" OR target_code = "10" THEN
+		-- Check Right: 01
+		ELSIF target_code = "01" THEN
 			go_left <= '0';
 			go_right <= '1';
 			go_reject <= '0';
@@ -46,7 +46,7 @@ BEGIN
 				can_sort <= '0';
 			END IF;
 		
-		-- Check reject
+		-- Check reject: 10 and others
 		ELSE
 			go_left <= '0';
 			go_right <= '0';

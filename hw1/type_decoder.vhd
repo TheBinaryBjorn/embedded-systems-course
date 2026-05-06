@@ -1,5 +1,5 @@
 --------------------- HW1 ---------------------
--- Project Name: hw1
+-- Project Name: Sorting_Sys
 -- File Name: type_decoder.vhd
 -- Author: Daniel Feldman
 -- Ver: 0.0.1

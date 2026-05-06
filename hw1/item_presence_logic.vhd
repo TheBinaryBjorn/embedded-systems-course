@@ -1,5 +1,5 @@
---------------------- hw1 ---------------------
--- Project Name: hw1
+--------------------- HW1 ---------------------
+-- Project Name: Sorting_Sys
 -- File Name: item_presence_logic.vhd
 -- Author: Daniel Feldman
 -- Ver: 0.0.1

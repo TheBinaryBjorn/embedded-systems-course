@@ -2,7 +2,7 @@
 -- Project Name: Sorting_Sys
 -- File Name: item_counter_TB
 -- Author: Tomer Rotman
--- Ver: 1.0.0
+-- Ver: 2.0.0
 -- Created Date: 02/05/2026
 -------------------------------------------------
 LIBRARY IEEE;
@@ -45,7 +45,7 @@ ARCHITECTURE behavior OF item_counter_TB IS
 		
 		PROCESS -- Scripting test cases sequentially to maintain code readability
 			BEGIN
-				-- Test Case 1: Count until maximum and check it goes back to 0 --
+				-- Test Case 1: Count until maximum and check it stays at maximum --
 				S_count_en <= '1';
 				FOR i IN 1 TO (2**N_const - 1) LOOP
 					WAIT UNTIL (S_clk'EVENT and S_clk = '1');
@@ -57,41 +57,48 @@ ARCHITECTURE behavior OF item_counter_TB IS
 			
 				WAIT UNTIL (S_clk'EVENT and S_clk = '1');
 				WAIT FOR 1ns;
-				ASSERT (S_item_count = 0)
-				REPORT "FAILED [Case 1.2 - Reaching Upper Limit] Counter did not return to 0 after reaching maximum."
+				ASSERT (S_item_count = 2**N_const - 1)
+				REPORT "FAILED [Case 1.2 - Reaching Upper Limit] Counter does not stay at maximum value."
 				SEVERITY ERROR;
 				
-				-- Test Case 2: Count Disabled --
+				-- Test Case 2: Synchronous Reset Count --
+				WAIT FOR 10ns;
+				S_rst <= '1'; -- Trigger Reset while clock is LOW
+				S_count_en <= '0';
+				WAIT FOR 5ns;
+				ASSERT (S_item_count = 2**N_const - 1)
+				REPORT "FAILED [Case 2.1 - Synchronous Reset]: Asynchronous Reset behavior detected."
+				SEVERITY ERROR;
+				
+				WAIT UNTIL (S_clk'EVENT and S_clk = '1');
+				WAIT FOR 1ns;
+				ASSERT (S_item_count = 0)
+				REPORT "FAILED [Case 2.2 - Counter Reset to 0]: Counter did not reset on rising edge."
+				SEVERITY ERROR;
+				
+				-- Test Case 3: Priority Check (Reset vs. Enable) --
+				WAIT UNTIL (S_clk'EVENT and S_clk = '1');
+				WAIT FOR 10ns;
+				S_count_en <= '1'; -- Try to count while Reset is HIGH
+				WAIT UNTIL (S_clk'EVENT and S_clk = '1');
+				WAIT UNTIL (S_clk'EVENT and S_clk = '1'); -- Wait two rising edges
+				WAIT FOR 1ns;
+				ASSERT (S_item_count = 0)
+				REPORT "FAILED [Case 3 - Reset Priority]: Enable signal overrode the Reset signal."
+				SEVERITY ERROR;
+				
+				-- Test Case 4: Count Disabled --
+				WAIT FOR 10ns;
+				S_rst <= '0';
 				WAIT UNTIL (S_clk'EVENT and S_clk = '1'); -- Count to 1
 				WAIT UNTIL (S_clk'EVENT and S_clk = '1'); -- Count to 2
+				WAIT FOR 10ns;
 				S_count_en <= '0'; -- Disable Count
-				WAIT FOR 35ns;
+				WAIT UNTIL (S_clk'EVENT and S_clk = '1');
+				WAIT FOR 1ns;
 				ASSERT (S_item_count = 2)
-				REPORT "FAILED [Case 2 - Disable Count]: Counter continued counting while Enable signal was LOW."
+				REPORT "FAILED [Case 4 - Disable Count]: Counter continued counting while Enable signal was LOW."
 				SEVERITY ERROR;
-				
-				-- Test Case 3: Synchronous Reset Count --
-				WAIT FOR 20ns;
-				S_rst <= '1'; -- Trigger Reset while clock is LOW
-				WAIT FOR 5ns;
-				ASSERT (S_item_count = 2)
-				REPORT "FAILED [Case 3.1 - Synchronous Reset]: Counter reset immediately (Asynchronous behavior detected)."
-				SEVERITY ERROR;
-				
-				WAIT FOR 5ns; -- Rising Edge
-				ASSERT (S_item_count = 0)
-				REPORT "FAILED [Case 3.2 - Counter Reset to 0]: Counter did not reset on rising edge."
-				SEVERITY ERROR;
-				
-				-- Test Case 4: Priority Check (Reset vs. Enable) --
-				S_count_en <= '1'; -- Try to count while Reset is HIGH
-				WAIT FOR 40ns; -- Wait two clock cycles
-				ASSERT (S_item_count) = 0
-				REPORT "FAILED [Case 4 - Reset Priority]: Enable signal overrode the Reset signal."
-				SEVERITY ERROR;
-				
-				S_rst <= '0';
-				S_count_en <= '0';
 				
 				REPORT "ALL TEST CASES COMPLETED";
 				WAIT; -- Freeze

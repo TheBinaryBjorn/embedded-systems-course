@@ -1,5 +1,5 @@
---------------- hw1 ---------------
--- Project Name: hw1
+--------------- HW1 ---------------
+-- Project Name: Sorting_Sys
 -- File Name: path_selector_TB.vhd
 -- Author: Daniel Feldman
 -- Ver: 0.0.1

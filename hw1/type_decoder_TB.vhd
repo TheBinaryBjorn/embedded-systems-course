@@ -1,5 +1,5 @@
 --------------------- HW1 ---------------------
--- Project Name: hw1
+-- Project Name: Sorting_Sys
 -- File Name: type_decoder_TB.vhd
 -- Author: Daniel Feldman
 -- Ver: 0.0.1
@@ -70,9 +70,9 @@ BEGIN
 		REPORT "TC4 Failed: Expected: S_target_code = 10, S_valid_item = '0'"
 		SEVERITY ERROR;
 		
-		-- TC5: S_item_type = "LL"
+		-- TC5: S_item_type = "XX"
 		-- Expected: S_target_code = "10", S_valid_item = '0'
-		S_item_type <= "LL";
+		S_item_type <= "XX";
 		WAIT FOR 10 ns;
 		
 		ASSERT (S_target_code = "10" AND S_valid_item = '0')

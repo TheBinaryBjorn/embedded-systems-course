@@ -2,7 +2,7 @@
 -- Project Name: Sorting_Sys
 -- File Name: item_counter
 -- Author: Tomer Rotman
--- Ver: 1.0.0
+-- Ver: 2.0.0
 -- Created Date: 02/05/2026
 -------------------------------------------------
 LIBRARY IEEE;
@@ -30,10 +30,10 @@ ARCHITECTURE behavior OF item_counter IS
 				IF rst = '1' THEN -- Clear counter to zero on reset
 					cnt <= (OTHERS => '0');
 				ELSIF count_en = '1' THEN -- When count is enabled
-					IF cnt = (2**N - 1) THEN -- Clear counter when reached its maximum value
-						cnt <= (OTHERS => '0');
-					ELSE
-						cnt <= cnt + 1; -- Standard increment
+					IF cnt = (2**N - 1) THEN -- Stop counting when maximum reached
+						cnt <= cnt;
+					ELSE -- Standard increment
+						cnt <= cnt + 1;
 					END IF;
 				END IF;
 			END IF;

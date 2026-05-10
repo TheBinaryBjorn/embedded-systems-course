@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Sorting_Sys
-Wed May 06 16:03:21 2026
+Sun May 10 15:14:28 2026
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -13,9 +13,9 @@ Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. General Register Statistics
-  9. Multiplexer Restructuring Statistics (Restructuring Performed)
- 10. Parameter Settings for User Entity Instance: Top-level Entity: |item_counter
+  8. State Machine - |sorting_control|cur_state
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
  11. Post-Synthesis Netlist Statistics for Top Partition
  12. Elapsed Time Per Partition
  13. Analysis & Synthesis Messages
@@ -45,10 +45,10 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed May 06 16:03:21 2026       ;
+; Analysis & Synthesis Status     ; Successful - Sun May 10 15:14:28 2026       ;
 ; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                   ; Sorting_Sys                                 ;
-; Top-level Entity Name           ; item_counter                                ;
+; Top-level Entity Name           ; sorting_control                             ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 4                                           ;
@@ -71,7 +71,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
-; Top-level entity name                                                           ; item_counter       ; Sorting_Sys        ;
+; Top-level entity name                                                           ; sorting_control    ; Sorting_Sys        ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
@@ -160,59 +160,72 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 16          ;
 ; Maximum allowed            ; 12          ;
 ;                            ;             ;
-; Average used               ; 1.00        ;
+; Average used               ; 1.01        ;
 ; Maximum used               ; 12          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-12        ;   0.0%      ;
+;     Processors 2-12        ;   0.1%      ;
 +----------------------------+-------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                            ;
-+----------------------------------+-----------------+-----------------+------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                     ; Library ;
-+----------------------------------+-----------------+-----------------+------------------------------------------------------------------+---------+
-; item_counter.vhd                 ; yes             ; User VHDL File  ; C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter.vhd ;         ;
-+----------------------------------+-----------------+-----------------+------------------------------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                               ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                        ; Library ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------+---------+
+; sorting_control.vhd              ; yes             ; User VHDL File  ; C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd ;         ;
++----------------------------------+-----------------+-----------------+---------------------------------------------------------------------+---------+
 
 
-+------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary          ;
-+---------------------------------------------+--------+
-; Resource                                    ; Usage  ;
-+---------------------------------------------+--------+
-; Estimate of Logic utilization (ALMs needed) ; 4      ;
-;                                             ;        ;
-; Combinational ALUT usage for logic          ; 4      ;
-;     -- 7 input functions                    ; 0      ;
-;     -- 6 input functions                    ; 4      ;
-;     -- 5 input functions                    ; 0      ;
-;     -- 4 input functions                    ; 0      ;
-;     -- <=3 input functions                  ; 0      ;
-;                                             ;        ;
-; Dedicated logic registers                   ; 4      ;
-;                                             ;        ;
-; I/O pins                                    ; 7      ;
-;                                             ;        ;
-; Total DSP Blocks                            ; 0      ;
-;                                             ;        ;
-; Maximum fan-out node                        ; cnt[0] ;
-; Maximum fan-out                             ; 5      ;
-; Total fan-out                               ; 43     ;
-; Average fan-out                             ; 1.95   ;
-+---------------------------------------------+--------+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Estimate of Logic utilization (ALMs needed) ; 3              ;
+;                                             ;                ;
+; Combinational ALUT usage for logic          ; 5              ;
+;     -- 7 input functions                    ; 0              ;
+;     -- 6 input functions                    ; 1              ;
+;     -- 5 input functions                    ; 2              ;
+;     -- 4 input functions                    ; 1              ;
+;     -- <=3 input functions                  ; 1              ;
+;                                             ;                ;
+; Dedicated logic registers                   ; 4              ;
+;                                             ;                ;
+; I/O pins                                    ; 7              ;
+;                                             ;                ;
+; Total DSP Blocks                            ; 0              ;
+;                                             ;                ;
+; Maximum fan-out node                        ; cur_state.SORT ;
+; Maximum fan-out                             ; 6              ;
+; Total fan-out                               ; 43             ;
+; Average fan-out                             ; 1.87           ;
++---------------------------------------------+----------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                     ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name  ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------+--------------+
-; |item_counter              ; 4 (4)               ; 4 (4)                     ; 0                 ; 0          ; 7    ; 0            ; |item_counter       ; item_counter ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------+--------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                        ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-----------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name     ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-----------------+--------------+
+; |sorting_control           ; 5 (5)               ; 4 (4)                     ; 0                 ; 0          ; 7    ; 0            ; |sorting_control    ; sorting_control ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-----------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++-------------------------------------------------------------------------------------------------+
+; State Machine - |sorting_control|cur_state                                                      ;
++----------------------+----------------------+----------------+-----------------+----------------+
+; Name                 ; cur_state.WAIT_CLEAR ; cur_state.SORT ; cur_state.CHECK ; cur_state.IDLE ;
++----------------------+----------------------+----------------+-----------------+----------------+
+; cur_state.IDLE       ; 0                    ; 0              ; 0               ; 0              ;
+; cur_state.CHECK      ; 0                    ; 0              ; 1               ; 1              ;
+; cur_state.SORT       ; 0                    ; 1              ; 0               ; 1              ;
+; cur_state.WAIT_CLEAR ; 1                    ; 0              ; 0               ; 1              ;
++----------------------+----------------------+----------------+-----------------+----------------+
 
 
 +------------------------------------------------------+
@@ -223,7 +236,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Total registers                              ; 4     ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Clear ; 4     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
 ; Number of registers using Preset             ; 0     ;
@@ -235,18 +248,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |item_counter|cnt[0]       ;
+; 8:1                ; 4 bits    ; 20 LEs        ; 16 LEs               ; 4 LEs                  ; No         ; |sorting_control|Selector0 ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-
-
-+------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |item_counter ;
-+----------------+-------+-----------------------------------------------------+
-; Parameter Name ; Value ; Type                                                ;
-+----------------+-------+-----------------------------------------------------+
-; N              ; 4     ; Signed Integer                                      ;
-+----------------+-------+-----------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +-----------------------------------------------------+
@@ -255,14 +258,17 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; arriav_ff             ; 4                           ;
-;     plain             ; 4                           ;
-; arriav_lcell_comb     ; 4                           ;
-;     normal            ; 4                           ;
-;         6 data inputs ; 4                           ;
+;     CLR               ; 4                           ;
+; arriav_lcell_comb     ; 5                           ;
+;     normal            ; 5                           ;
+;         2 data inputs ; 1                           ;
+;         4 data inputs ; 1                           ;
+;         5 data inputs ; 2                           ;
+;         6 data inputs ; 1                           ;
 ; boundary_port         ; 7                           ;
 ;                       ;                             ;
 ; Max LUT depth         ; 1.00                        ;
-; Average LUT depth     ; 0.91                        ;
+; Average LUT depth     ; 0.86                        ;
 +-----------------------+-----------------------------+
 
 
@@ -281,7 +287,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
-    Info: Processing started: Wed May 06 16:03:10 2026
+    Info: Processing started: Sun May 10 15:14:16 2026
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Sorting_Sys -c Sorting_Sys
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
@@ -315,18 +321,25 @@ Info (12021): Found 2 design units, including 1 entities, in source file item_co
 Info (12021): Found 2 design units, including 1 entities, in source file item_counter_tb.vhd
     Info (12022): Found design unit 1: item_counter_TB-behavior File: C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd Line: 16
     Info (12023): Found entity 1: item_counter_TB File: C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd Line: 13
-Info (12127): Elaborating entity "item_counter" for the top level hierarchy
+Warning (12019): Can't analyze file -- file Sorting_Sys.vhd is missing
+Info (12021): Found 2 design units, including 1 entities, in source file sorting_control.vhd
+    Info (12022): Found design unit 1: sorting_control-behavior File: C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd Line: 23
+    Info (12023): Found entity 1: sorting_control File: C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd Line: 11
+Info (12021): Found 2 design units, including 1 entities, in source file sorting_control_tb.vhd
+    Info (12022): Found design unit 1: sorting_control_TB-behavior File: C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd Line: 14
+    Info (12023): Found entity 1: sorting_control_TB File: C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd Line: 11
+Info (12127): Elaborating entity "sorting_control" for the top level hierarchy
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 11 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 3 input pins
-    Info (21059): Implemented 4 output pins
-    Info (21061): Implemented 4 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4906 megabytes
-    Info: Processing ended: Wed May 06 16:03:21 2026
-    Info: Elapsed time: 00:00:11
-    Info: Total CPU time (on all processors): 00:00:26
+Info (21057): Implemented 12 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 5 input pins
+    Info (21059): Implemented 2 output pins
+    Info (21061): Implemented 5 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 2 warnings
+    Info: Peak virtual memory: 4910 megabytes
+    Info: Processing ended: Sun May 10 15:14:29 2026
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:29
 
 

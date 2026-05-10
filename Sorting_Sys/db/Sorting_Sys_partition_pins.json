@@ -4,23 +4,7 @@
 			"name" : "Top",
 			"pins" : [
 				{
-					"name" : "item_count[0]",
-					"strict" : false
-				},
-				{
-					"name" : "item_count[1]",
-					"strict" : false
-				},
-				{
-					"name" : "item_count[2]",
-					"strict" : false
-				},
-				{
-					"name" : "item_count[3]",
-					"strict" : false
-				},
-				{
-					"name" : "rst",
+					"name" : "enable_sort",
 					"strict" : false
 				},
 				{
@@ -28,7 +12,23 @@
 					"strict" : false
 				},
 				{
+					"name" : "valid_item",
+					"strict" : false
+				},
+				{
+					"name" : "item_present",
+					"strict" : false
+				},
+				{
+					"name" : "can_sort",
+					"strict" : false
+				},
+				{
 					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "rst",
 					"strict" : false
 				}
 			]

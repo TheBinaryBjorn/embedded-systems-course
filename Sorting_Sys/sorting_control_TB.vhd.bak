@@ -1,0 +1,9 @@
+--------------- HW2 ---------------
+-- Project Name: Sorting_Sys
+-- File Name: sorting_control_TB.vhd
+-- Author: Daniel Feldman
+-- Ver: 1.0.0
+-- Created Date: 10/05/2026
+------------------------------------
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.all;

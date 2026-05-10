@@ -1,19 +1,24 @@
-|item_counter
-clk => cnt[0].CLK
-clk => cnt[1].CLK
-clk => cnt[2].CLK
-clk => cnt[3].CLK
-rst => cnt.OUTPUTSELECT
-rst => cnt.OUTPUTSELECT
-rst => cnt.OUTPUTSELECT
-rst => cnt.OUTPUTSELECT
-count_en => cnt.OUTPUTSELECT
-count_en => cnt.OUTPUTSELECT
-count_en => cnt.OUTPUTSELECT
-count_en => cnt.OUTPUTSELECT
-item_count[0] <= cnt[0].DB_MAX_OUTPUT_PORT_TYPE
-item_count[1] <= cnt[1].DB_MAX_OUTPUT_PORT_TYPE
-item_count[2] <= cnt[2].DB_MAX_OUTPUT_PORT_TYPE
-item_count[3] <= cnt[3].DB_MAX_OUTPUT_PORT_TYPE
+|sorting_control
+clk => cur_state~1.DATAIN
+rst => cur_state~3.DATAIN
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+item_present => next_state.OUTPUTSELECT
+valid_item => count_en.DATAB
+can_sort => next_state.OUTPUTSELECT
+can_sort => next_state.OUTPUTSELECT
+can_sort => next_state.OUTPUTSELECT
+can_sort => next_state.OUTPUTSELECT
+enable_sort <= enable_sort.DB_MAX_OUTPUT_PORT_TYPE
+count_en <= count_en.DB_MAX_OUTPUT_PORT_TYPE
 
 

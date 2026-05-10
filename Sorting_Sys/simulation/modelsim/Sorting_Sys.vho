@@ -17,7 +17,7 @@
 -- PROGRAM "Quartus Prime"
 -- VERSION "Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition"
 
--- DATE "05/06/2026 16:04:42"
+-- DATE "05/10/2026 15:15:49"
 
 -- 
 -- Device: Altera 5CGXFC7C7F23C8 Package FBGA484
@@ -36,26 +36,29 @@ USE ALTERA_LNSIM.ALTERA_LNSIM_COMPONENTS.ALL;
 USE CYCLONEV.CYCLONEV_COMPONENTS.ALL;
 USE IEEE.STD_LOGIC_1164.ALL;
 
-ENTITY 	item_counter IS
+ENTITY 	sorting_control IS
     PORT (
 	clk : IN std_logic;
 	rst : IN std_logic;
-	count_en : IN std_logic;
-	item_count : OUT std_logic_vector(3 DOWNTO 0)
+	item_present : IN std_logic;
+	valid_item : IN std_logic;
+	can_sort : IN std_logic;
+	enable_sort : OUT std_logic;
+	count_en : OUT std_logic
 	);
-END item_counter;
+END sorting_control;
 
 -- Design Ports Information
--- item_count[0]	=>  Location: PIN_L17,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- item_count[1]	=>  Location: PIN_K17,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- item_count[2]	=>  Location: PIN_M21,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- item_count[3]	=>  Location: PIN_L19,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- rst	=>  Location: PIN_N21,	 I/O Standard: 2.5 V,	 Current Strength: Default
--- count_en	=>  Location: PIN_M20,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- enable_sort	=>  Location: PIN_K22,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- count_en	=>  Location: PIN_L17,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- valid_item	=>  Location: PIN_N20,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- item_present	=>  Location: PIN_M21,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- can_sort	=>  Location: PIN_K17,	 I/O Standard: 2.5 V,	 Current Strength: Default
 -- clk	=>  Location: PIN_M16,	 I/O Standard: 2.5 V,	 Current Strength: Default
+-- rst	=>  Location: PIN_M20,	 I/O Standard: 2.5 V,	 Current Strength: Default
 
 
-ARCHITECTURE structure OF item_counter IS
+ARCHITECTURE structure OF sorting_control IS
 SIGNAL gnd : std_logic := '0';
 SIGNAL vcc : std_logic := '1';
 SIGNAL unknown : std_logic := 'X';
@@ -67,40 +70,72 @@ SIGNAL ww_devclrn : std_logic;
 SIGNAL ww_devpor : std_logic;
 SIGNAL ww_clk : std_logic;
 SIGNAL ww_rst : std_logic;
+SIGNAL ww_item_present : std_logic;
+SIGNAL ww_valid_item : std_logic;
+SIGNAL ww_can_sort : std_logic;
+SIGNAL ww_enable_sort : std_logic;
 SIGNAL ww_count_en : std_logic;
-SIGNAL ww_item_count : std_logic_vector(3 DOWNTO 0);
 SIGNAL \~QUARTUS_CREATED_GND~I_combout\ : std_logic;
 SIGNAL \clk~input_o\ : std_logic;
 SIGNAL \clk~inputCLKENA0_outclk\ : std_logic;
+SIGNAL \item_present~input_o\ : std_logic;
+SIGNAL \can_sort~input_o\ : std_logic;
+SIGNAL \cur_state.WAIT_CLEAR~0_combout\ : std_logic;
 SIGNAL \rst~input_o\ : std_logic;
-SIGNAL \count_en~input_o\ : std_logic;
-SIGNAL \cnt[1]~1_combout\ : std_logic;
-SIGNAL \cnt[3]~3_combout\ : std_logic;
-SIGNAL \cnt[2]~2_combout\ : std_logic;
-SIGNAL \cnt[0]~0_combout\ : std_logic;
-SIGNAL cnt : std_logic_vector(3 DOWNTO 0);
-SIGNAL ALT_INV_cnt : std_logic_vector(3 DOWNTO 0);
-SIGNAL \ALT_INV_count_en~input_o\ : std_logic;
+SIGNAL \cur_state.WAIT_CLEAR~q\ : std_logic;
+SIGNAL \Selector0~0_combout\ : std_logic;
+SIGNAL \cur_state.IDLE~q\ : std_logic;
+SIGNAL \Selector1~0_combout\ : std_logic;
+SIGNAL \cur_state.CHECK~q\ : std_logic;
+SIGNAL \Selector2~0_combout\ : std_logic;
+SIGNAL \cur_state.SORT~q\ : std_logic;
+SIGNAL \valid_item~input_o\ : std_logic;
+SIGNAL \count_en~0_combout\ : std_logic;
+SIGNAL \ALT_INV_cur_state.CHECK~q\ : std_logic;
+SIGNAL \ALT_INV_cur_state.IDLE~q\ : std_logic;
+SIGNAL \ALT_INV_cur_state.SORT~q\ : std_logic;
 SIGNAL \ALT_INV_rst~input_o\ : std_logic;
+SIGNAL \ALT_INV_can_sort~input_o\ : std_logic;
+SIGNAL \ALT_INV_item_present~input_o\ : std_logic;
+SIGNAL \ALT_INV_valid_item~input_o\ : std_logic;
+SIGNAL \ALT_INV_cur_state.WAIT_CLEAR~q\ : std_logic;
 
 BEGIN
 
 ww_clk <= clk;
 ww_rst <= rst;
-ww_count_en <= count_en;
-item_count <= ww_item_count;
+ww_item_present <= item_present;
+ww_valid_item <= valid_item;
+ww_can_sort <= can_sort;
+enable_sort <= ww_enable_sort;
+count_en <= ww_count_en;
 ww_devoe <= devoe;
 ww_devclrn <= devclrn;
 ww_devpor <= devpor;
-ALT_INV_cnt(0) <= NOT cnt(0);
-ALT_INV_cnt(1) <= NOT cnt(1);
-ALT_INV_cnt(2) <= NOT cnt(2);
-ALT_INV_cnt(3) <= NOT cnt(3);
-\ALT_INV_count_en~input_o\ <= NOT \count_en~input_o\;
+\ALT_INV_cur_state.CHECK~q\ <= NOT \cur_state.CHECK~q\;
+\ALT_INV_cur_state.IDLE~q\ <= NOT \cur_state.IDLE~q\;
+\ALT_INV_cur_state.SORT~q\ <= NOT \cur_state.SORT~q\;
 \ALT_INV_rst~input_o\ <= NOT \rst~input_o\;
+\ALT_INV_can_sort~input_o\ <= NOT \can_sort~input_o\;
+\ALT_INV_item_present~input_o\ <= NOT \item_present~input_o\;
+\ALT_INV_valid_item~input_o\ <= NOT \valid_item~input_o\;
+\ALT_INV_cur_state.WAIT_CLEAR~q\ <= NOT \cur_state.WAIT_CLEAR~q\;
+
+-- Location: IOOBUF_X89_Y38_N56
+\enable_sort~output\ : cyclonev_io_obuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	open_drain_output => "false",
+	shift_series_termination_control => "false")
+-- pragma translate_on
+PORT MAP (
+	i => \cur_state.SORT~q\,
+	devoe => ww_devoe,
+	o => ww_enable_sort);
 
 -- Location: IOOBUF_X89_Y37_N22
-\item_count[0]~output\ : cyclonev_io_obuf
+\count_en~output\ : cyclonev_io_obuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
@@ -108,48 +143,9 @@ GENERIC MAP (
 	shift_series_termination_control => "false")
 -- pragma translate_on
 PORT MAP (
-	i => cnt(0),
+	i => \count_en~0_combout\,
 	devoe => ww_devoe,
-	o => ww_item_count(0));
-
--- Location: IOOBUF_X89_Y37_N5
-\item_count[1]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => cnt(1),
-	devoe => ww_devoe,
-	o => ww_item_count(1));
-
--- Location: IOOBUF_X89_Y37_N56
-\item_count[2]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => cnt(2),
-	devoe => ww_devoe,
-	o => ww_item_count(2));
-
--- Location: IOOBUF_X89_Y38_N5
-\item_count[3]~output\ : cyclonev_io_obuf
--- pragma translate_off
-GENERIC MAP (
-	bus_hold => "false",
-	open_drain_output => "false",
-	shift_series_termination_control => "false")
--- pragma translate_on
-PORT MAP (
-	i => cnt(3),
-	devoe => ww_devoe,
-	o => ww_item_count(3));
+	o => ww_count_en);
 
 -- Location: IOIBUF_X89_Y35_N61
 \clk~input\ : cyclonev_io_ibuf
@@ -176,7 +172,52 @@ PORT MAP (
 	inclk => \clk~input_o\,
 	outclk => \clk~inputCLKENA0_outclk\);
 
--- Location: IOIBUF_X89_Y35_N95
+-- Location: IOIBUF_X89_Y37_N55
+\item_present~input\ : cyclonev_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_item_present,
+	o => \item_present~input_o\);
+
+-- Location: IOIBUF_X89_Y37_N4
+\can_sort~input\ : cyclonev_io_ibuf
+-- pragma translate_off
+GENERIC MAP (
+	bus_hold => "false",
+	simulate_z_as => "z")
+-- pragma translate_on
+PORT MAP (
+	i => ww_can_sort,
+	o => \can_sort~input_o\);
+
+-- Location: LABCELL_X88_Y37_N36
+\cur_state.WAIT_CLEAR~0\ : cyclonev_lcell_comb
+-- Equation(s):
+-- \cur_state.WAIT_CLEAR~0_combout\ = ( \cur_state.WAIT_CLEAR~q\ & ( \cur_state.IDLE~q\ & ( ((!\item_present~input_o\ & ((\cur_state.CHECK~q\))) # (\item_present~input_o\ & ((!\can_sort~input_o\) # (!\cur_state.CHECK~q\)))) # (\cur_state.SORT~q\) ) ) ) # ( 
+-- !\cur_state.WAIT_CLEAR~q\ & ( \cur_state.IDLE~q\ & ( (\cur_state.SORT~q\ & ((!\cur_state.CHECK~q\) # ((\item_present~input_o\ & !\can_sort~input_o\)))) ) ) ) # ( \cur_state.WAIT_CLEAR~q\ & ( !\cur_state.IDLE~q\ & ( ((\cur_state.CHECK~q\ & 
+-- ((!\item_present~input_o\) # (\can_sort~input_o\)))) # (\cur_state.SORT~q\) ) ) ) # ( !\cur_state.WAIT_CLEAR~q\ & ( !\cur_state.IDLE~q\ & ( (\cur_state.SORT~q\ & ((!\item_present~input_o\ & ((!\cur_state.CHECK~q\))) # (\item_present~input_o\ & 
+-- (\can_sort~input_o\ & \cur_state.CHECK~q\)))) ) ) )
+
+-- pragma translate_off
+GENERIC MAP (
+	extended_lut => "off",
+	lut_mask => "0000101000000001000011111011111100001111000001000101111111101111",
+	shared_arith => "off")
+-- pragma translate_on
+PORT MAP (
+	dataa => \ALT_INV_item_present~input_o\,
+	datab => \ALT_INV_can_sort~input_o\,
+	datac => \ALT_INV_cur_state.SORT~q\,
+	datad => \ALT_INV_cur_state.CHECK~q\,
+	datae => \ALT_INV_cur_state.WAIT_CLEAR~q\,
+	dataf => \ALT_INV_cur_state.IDLE~q\,
+	combout => \cur_state.WAIT_CLEAR~0_combout\);
+
+-- Location: IOIBUF_X89_Y37_N38
 \rst~input\ : cyclonev_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
@@ -187,155 +228,151 @@ PORT MAP (
 	i => ww_rst,
 	o => \rst~input_o\);
 
--- Location: IOIBUF_X89_Y37_N38
-\count_en~input\ : cyclonev_io_ibuf
+-- Location: FF_X88_Y37_N38
+\cur_state.WAIT_CLEAR\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputCLKENA0_outclk\,
+	d => \cur_state.WAIT_CLEAR~0_combout\,
+	clrn => \ALT_INV_rst~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \cur_state.WAIT_CLEAR~q\);
+
+-- Location: LABCELL_X88_Y37_N12
+\Selector0~0\ : cyclonev_lcell_comb
+-- Equation(s):
+-- \Selector0~0_combout\ = ( \cur_state.CHECK~q\ & ( ((!\cur_state.WAIT_CLEAR~q\ & \cur_state.SORT~q\)) # (\item_present~input_o\) ) ) # ( !\cur_state.CHECK~q\ & ( ((!\cur_state.WAIT_CLEAR~q\ & ((\cur_state.IDLE~q\) # (\cur_state.SORT~q\)))) # 
+-- (\item_present~input_o\) ) )
+
+-- pragma translate_off
+GENERIC MAP (
+	extended_lut => "off",
+	lut_mask => "0011101110111011001110111011101100111011001110110011101100111011",
+	shared_arith => "off")
+-- pragma translate_on
+PORT MAP (
+	dataa => \ALT_INV_cur_state.WAIT_CLEAR~q\,
+	datab => \ALT_INV_item_present~input_o\,
+	datac => \ALT_INV_cur_state.SORT~q\,
+	datad => \ALT_INV_cur_state.IDLE~q\,
+	dataf => \ALT_INV_cur_state.CHECK~q\,
+	combout => \Selector0~0_combout\);
+
+-- Location: FF_X88_Y37_N14
+\cur_state.IDLE\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputCLKENA0_outclk\,
+	d => \Selector0~0_combout\,
+	clrn => \ALT_INV_rst~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \cur_state.IDLE~q\);
+
+-- Location: LABCELL_X88_Y37_N42
+\Selector1~0\ : cyclonev_lcell_comb
+-- Equation(s):
+-- \Selector1~0_combout\ = ( \cur_state.CHECK~q\ & ( !\cur_state.SORT~q\ & ( (\item_present~input_o\ & !\can_sort~input_o\) ) ) ) # ( !\cur_state.CHECK~q\ & ( !\cur_state.SORT~q\ & ( (\item_present~input_o\ & !\cur_state.IDLE~q\) ) ) )
+
+-- pragma translate_off
+GENERIC MAP (
+	extended_lut => "off",
+	lut_mask => "0101010100000000010001000100010000000000000000000000000000000000",
+	shared_arith => "off")
+-- pragma translate_on
+PORT MAP (
+	dataa => \ALT_INV_item_present~input_o\,
+	datab => \ALT_INV_can_sort~input_o\,
+	datad => \ALT_INV_cur_state.IDLE~q\,
+	datae => \ALT_INV_cur_state.CHECK~q\,
+	dataf => \ALT_INV_cur_state.SORT~q\,
+	combout => \Selector1~0_combout\);
+
+-- Location: FF_X88_Y37_N44
+\cur_state.CHECK\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputCLKENA0_outclk\,
+	d => \Selector1~0_combout\,
+	clrn => \ALT_INV_rst~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \cur_state.CHECK~q\);
+
+-- Location: LABCELL_X88_Y37_N51
+\Selector2~0\ : cyclonev_lcell_comb
+-- Equation(s):
+-- \Selector2~0_combout\ = ( !\cur_state.SORT~q\ & ( \cur_state.CHECK~q\ & ( (\item_present~input_o\ & \can_sort~input_o\) ) ) )
+
+-- pragma translate_off
+GENERIC MAP (
+	extended_lut => "off",
+	lut_mask => "0000000000000000000000000000000000000000010101010000000000000000",
+	shared_arith => "off")
+-- pragma translate_on
+PORT MAP (
+	dataa => \ALT_INV_item_present~input_o\,
+	datad => \ALT_INV_can_sort~input_o\,
+	datae => \ALT_INV_cur_state.SORT~q\,
+	dataf => \ALT_INV_cur_state.CHECK~q\,
+	combout => \Selector2~0_combout\);
+
+-- Location: FF_X88_Y37_N53
+\cur_state.SORT\ : dffeas
+-- pragma translate_off
+GENERIC MAP (
+	is_wysiwyg => "true",
+	power_up => "low")
+-- pragma translate_on
+PORT MAP (
+	clk => \clk~inputCLKENA0_outclk\,
+	d => \Selector2~0_combout\,
+	clrn => \ALT_INV_rst~input_o\,
+	devclrn => ww_devclrn,
+	devpor => ww_devpor,
+	q => \cur_state.SORT~q\);
+
+-- Location: IOIBUF_X89_Y35_N78
+\valid_item~input\ : cyclonev_io_ibuf
 -- pragma translate_off
 GENERIC MAP (
 	bus_hold => "false",
 	simulate_z_as => "z")
 -- pragma translate_on
 PORT MAP (
-	i => ww_count_en,
-	o => \count_en~input_o\);
+	i => ww_valid_item,
+	o => \valid_item~input_o\);
 
--- Location: LABCELL_X88_Y37_N48
-\cnt[1]~1\ : cyclonev_lcell_comb
+-- Location: LABCELL_X88_Y37_N15
+\count_en~0\ : cyclonev_lcell_comb
 -- Equation(s):
--- \cnt[1]~1_combout\ = ( cnt(1) & ( cnt(0) & ( (!\rst~input_o\ & ((!\count_en~input_o\) # ((cnt(2) & cnt(3))))) ) ) ) # ( !cnt(1) & ( cnt(0) & ( (!\rst~input_o\ & \count_en~input_o\) ) ) ) # ( cnt(1) & ( !cnt(0) & ( !\rst~input_o\ ) ) )
+-- \count_en~0_combout\ = ( \cur_state.SORT~q\ & ( \valid_item~input_o\ ) )
 
 -- pragma translate_off
 GENERIC MAP (
 	extended_lut => "off",
-	lut_mask => "0000000000000000101010101010101000100010001000101000100010001010",
+	lut_mask => "0000000000000000000000000000000000001111000011110000111100001111",
 	shared_arith => "off")
 -- pragma translate_on
 PORT MAP (
-	dataa => \ALT_INV_rst~input_o\,
-	datab => \ALT_INV_count_en~input_o\,
-	datac => ALT_INV_cnt(2),
-	datad => ALT_INV_cnt(3),
-	datae => ALT_INV_cnt(1),
-	dataf => ALT_INV_cnt(0),
-	combout => \cnt[1]~1_combout\);
+	datac => \ALT_INV_valid_item~input_o\,
+	dataf => \ALT_INV_cur_state.SORT~q\,
+	combout => \count_en~0_combout\);
 
--- Location: FF_X88_Y37_N50
-\cnt[1]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputCLKENA0_outclk\,
-	d => \cnt[1]~1_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => cnt(1));
-
--- Location: LABCELL_X88_Y37_N6
-\cnt[3]~3\ : cyclonev_lcell_comb
--- Equation(s):
--- \cnt[3]~3_combout\ = ( cnt(3) & ( cnt(1) & ( !\rst~input_o\ ) ) ) # ( !cnt(3) & ( cnt(1) & ( (cnt(2) & (\count_en~input_o\ & (cnt(0) & !\rst~input_o\))) ) ) ) # ( cnt(3) & ( !cnt(1) & ( !\rst~input_o\ ) ) )
-
--- pragma translate_off
-GENERIC MAP (
-	extended_lut => "off",
-	lut_mask => "0000000000000000111111110000000000000001000000001111111100000000",
-	shared_arith => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => ALT_INV_cnt(2),
-	datab => \ALT_INV_count_en~input_o\,
-	datac => ALT_INV_cnt(0),
-	datad => \ALT_INV_rst~input_o\,
-	datae => ALT_INV_cnt(3),
-	dataf => ALT_INV_cnt(1),
-	combout => \cnt[3]~3_combout\);
-
--- Location: FF_X88_Y37_N8
-\cnt[3]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputCLKENA0_outclk\,
-	d => \cnt[3]~3_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => cnt(3));
-
--- Location: LABCELL_X88_Y37_N54
-\cnt[2]~2\ : cyclonev_lcell_comb
--- Equation(s):
--- \cnt[2]~2_combout\ = ( cnt(2) & ( cnt(1) & ( (!\rst~input_o\ & ((!\count_en~input_o\) # ((!cnt(0)) # (cnt(3))))) ) ) ) # ( !cnt(2) & ( cnt(1) & ( (!\rst~input_o\ & (\count_en~input_o\ & cnt(0))) ) ) ) # ( cnt(2) & ( !cnt(1) & ( !\rst~input_o\ ) ) )
-
--- pragma translate_off
-GENERIC MAP (
-	extended_lut => "off",
-	lut_mask => "0000000000000000101010101010101000000010000000101010100010101010",
-	shared_arith => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \ALT_INV_rst~input_o\,
-	datab => \ALT_INV_count_en~input_o\,
-	datac => ALT_INV_cnt(0),
-	datad => ALT_INV_cnt(3),
-	datae => ALT_INV_cnt(2),
-	dataf => ALT_INV_cnt(1),
-	combout => \cnt[2]~2_combout\);
-
--- Location: FF_X88_Y37_N56
-\cnt[2]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputCLKENA0_outclk\,
-	d => \cnt[2]~2_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => cnt(2));
-
--- Location: LABCELL_X88_Y37_N24
-\cnt[0]~0\ : cyclonev_lcell_comb
--- Equation(s):
--- \cnt[0]~0_combout\ = ( cnt(0) & ( cnt(1) & ( (!\rst~input_o\ & ((!\count_en~input_o\) # ((cnt(2) & cnt(3))))) ) ) ) # ( !cnt(0) & ( cnt(1) & ( (!\rst~input_o\ & \count_en~input_o\) ) ) ) # ( cnt(0) & ( !cnt(1) & ( (!\rst~input_o\ & !\count_en~input_o\) ) 
--- ) ) # ( !cnt(0) & ( !cnt(1) & ( (!\rst~input_o\ & \count_en~input_o\) ) ) )
-
--- pragma translate_off
-GENERIC MAP (
-	extended_lut => "off",
-	lut_mask => "0010001000100010100010001000100000100010001000101000100010001010",
-	shared_arith => "off")
--- pragma translate_on
-PORT MAP (
-	dataa => \ALT_INV_rst~input_o\,
-	datab => \ALT_INV_count_en~input_o\,
-	datac => ALT_INV_cnt(2),
-	datad => ALT_INV_cnt(3),
-	datae => ALT_INV_cnt(0),
-	dataf => ALT_INV_cnt(1),
-	combout => \cnt[0]~0_combout\);
-
--- Location: FF_X88_Y37_N26
-\cnt[0]\ : dffeas
--- pragma translate_off
-GENERIC MAP (
-	is_wysiwyg => "true",
-	power_up => "low")
--- pragma translate_on
-PORT MAP (
-	clk => \clk~inputCLKENA0_outclk\,
-	d => \cnt[0]~0_combout\,
-	devclrn => ww_devclrn,
-	devpor => ww_devpor,
-	q => cnt(0));
-
--- Location: LABCELL_X36_Y68_N3
+-- Location: LABCELL_X35_Y35_N0
 \~QUARTUS_CREATED_GND~I\ : cyclonev_lcell_comb
 -- Equation(s):
 

@@ -9,93 +9,85 @@ z2
 !i10f 100
 cModel Technology
 Z0 dC:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/simulation/modelsim
-Eitem_counter
-Z1 w1778072481
-Z2 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
-Z3 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
-Z4 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
-Z5 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Esorting_control
+Z1 w1778413363
+Z2 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z3 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
 !i122 0
 R0
-Z6 8C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter.vhd
-Z7 FC:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter.vhd
+Z4 8C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd
+Z5 FC:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd
 l0
-L12 1
-Vbn`ReZjobicB3O_l5Gz_N2
-!s100 67:nI:=6Jf^ORL4RDNzKH3
-Z8 OV;C;2020.1;71
+Z6 L11 1
+VYfJmS[0ld>_m^gb?1Q<N91
+!s100 mIc10L]`?UdYeZ6[i>RU43
+Z7 OV;C;2020.1;71
 31
-Z9 !s110 1778072728
+Z8 !s110 1778415496
 !i10b 1
-Z10 !s108 1778072728.000000
-Z11 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter.vhd|
-Z12 !s107 C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter.vhd|
+Z9 !s108 1778415496.000000
+Z10 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd|
+Z11 !s107 C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd|
 !i113 1
-Z13 o-93 -work work
-Z14 tExplicit 1 CvgOpt 0
+Z12 o-93 -work work
+Z13 tExplicit 1 CvgOpt 0
 Abehavior
 R2
 R3
-R4
-R5
-DEx4 work 12 item_counter 0 22 bn`ReZjobicB3O_l5Gz_N2
+DEx4 work 15 sorting_control 0 22 YfJmS[0ld>_m^gb?1Q<N91
 !i122 0
-l25
-L22 22
-VF^=ob;Y^E3`[EkzIV3KRk0
-!s100 >a6Zodo7U]W5W]Fdl:z1C0
-R8
+l26
+L23 47
+VMMMEkda3]f;i2726G4G=j0
+!s100 @DlW`oZ25jVfOh5D:?6_b3
+R7
 31
-R9
+R8
 !i10b 1
+R9
 R10
 R11
-R12
 !i113 1
+R12
 R13
-R14
-Eitem_counter_tb
-Z15 w1778072581
-R3
+Esorting_control_tb
+Z14 w1778415101
 R2
-R4
-R5
+R3
 !i122 1
 R0
-Z16 8C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd
-Z17 FC:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd
+Z15 8C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd
+Z16 FC:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd
 l0
-L13 1
-V47EUG:1Uiz6lIM?9lg=Xb1
-!s100 <8=BT7NT]:YFXUUmXXkfd2
-R8
+R6
+VzjE6^OM6kc@na:8cV8a@D3
+!s100 PY?7:H:`OP]2:P=86XaCG3
+R7
 31
+R8
+!i10b 1
 R9
-!i10b 1
-R10
-Z18 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd|
-!s107 C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd|
+Z17 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd|
+!s107 C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd|
 !i113 1
+R12
 R13
-R14
 Abehavior
-R3
 R2
-R4
-R5
-DEx4 work 15 item_counter_tb 0 22 47EUG:1Uiz6lIM?9lg=Xb1
+R3
+DEx4 work 18 sorting_control_tb 0 22 zjE6^OM6kc@na:8cV8a@D3
 !i122 1
-l34
-L16 92
-V`NOJ62I_mQLC6RbYAiJme0
-!s100 Q3ddZGVi738fBFG?zlz<O3
-R8
+l37
+L14 112
+V[dO8LT1HzML??I1C:d=2U3
+!s100 o[9bR;KS[h_^aYEGWgeA11
+R7
 31
-!s110 1778072729
+R8
 !i10b 1
-R10
-R18
-Z19 !s107 C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/item_counter_TB.vhd|
+R9
+R17
+Z18 !s107 C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd|
 !i113 1
+R12
 R13
-R14

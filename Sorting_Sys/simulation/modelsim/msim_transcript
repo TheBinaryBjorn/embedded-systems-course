@@ -1,55 +1,82 @@
 # Reading pref.tcl
-# do Sorting_Sys_run_msim_rtl_vhdl.do
-# if {[file exists rtl_work]} {
-# 	vdel -lib rtl_work -all
+# do Sorting_Sys_run_msim_gate_vhdl.do
+# if {[file exists gate_work]} {
+# 	vdel -lib gate_work -all
 # }
-# vlib rtl_work
-# vmap work rtl_work
+# vlib gate_work
+# vmap work gate_work
 # Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
-# vmap work rtl_work 
-# Copying C:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+# vmap work gate_work 
+# Copying D:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd}
+# vcom -93 -work work {Sorting_Sys.vho}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:18:16 on May 10,2026
-# vcom -reportprogress 300 -93 -work work C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd 
+# Start time: 10:19:50 on May 23,2026
+# vcom -reportprogress 300 -93 -work work Sorting_Sys.vho 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity sorting_control
-# -- Compiling architecture behavior of sorting_control
-# End time: 15:18:16 on May 10,2026, Elapsed time: 0:00:00
+# -- Loading package VITAL_Timing
+# -- Loading package VITAL_Primitives
+# -- Loading package dffeas_pack
+# -- Loading package altera_primitives_components
+# -- Loading package altera_lnsim_components
+# -- Loading package cyclonev_atom_pack
+# -- Loading package cyclonev_components
+# -- Compiling entity automated_sorting_sys
+# -- Compiling architecture structure of automated_sorting_sys
+# End time: 10:19:51 on May 23,2026, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0
 # 
-# vcom -93 -work work {C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd}
+# vcom -93 -work work {C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd}
 # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 15:18:16 on May 10,2026
-# vcom -reportprogress 300 -93 -work work C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control_TB.vhd 
+# Start time: 10:19:51 on May 23,2026
+# vcom -reportprogress 300 -93 -work work C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
-# -- Compiling entity sorting_control_TB
-# -- Compiling architecture behavior of sorting_control_TB
-# End time: 15:18:17 on May 10,2026, Elapsed time: 0:00:01
+# -- Compiling entity automated_sorting_sys_TB
+# -- Compiling architecture behavior of automated_sorting_sys_TB
+# End time: 10:19:51 on May 23,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L rtl_work -L work -voptargs="+acc"  sorting_control_TB
-# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L rtl_work -L work -voptargs=""+acc"" sorting_control_TB 
-# Start time: 15:18:17 on May 10,2026
+# vsim -t 1ps -L altera -L altera_lnsim -L cyclonev -L gate_work -L work -voptargs="+acc"  automated_sorting_sys_TB
+# vsim -t 1ps -L altera -L altera_lnsim -L cyclonev -L gate_work -L work -voptargs=""+acc"" automated_sorting_sys_TB 
+# Start time: 10:19:52 on May 23,2026
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
-# Loading work.sorting_control_tb(behavior)
-# Loading work.sorting_control(behavior)
+# Loading work.automated_sorting_sys_tb(behavior)
+# Loading ieee.vital_timing(body)
+# Loading ieee.vital_primitives(body)
+# Loading altera.dffeas_pack
+# Loading altera.altera_primitives_components
+# Loading altera_lnsim.altera_lnsim_components
+# Loading cyclonev.cyclonev_atom_pack(body)
+# Loading cyclonev.cyclonev_components
+# Loading work.automated_sorting_sys(structure)
+# ** Warning: (vsim-8713) Suspect default binding for component instance 'DUT'.
+# Entity has no generics at all; the component has generic:
+#           N
+#    Time: 0 ps  Iteration: 0  Instance: /automated_sorting_sys_tb/DUT File: C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd Line: 70
+# Loading ieee.std_logic_arith(body)
+# Loading cyclonev.cyclonev_io_obuf(arch)
+# Loading cyclonev.cyclonev_io_ibuf(arch)
+# Loading cyclonev.cyclonev_clkena(behavior)
+# Loading altera.dffeas(vital_dffeas)
+# Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)
 # 
 # add wave *
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: Tomer Rotman  Hostname: TOMERPC  ProcessID: 6376
+#           Attempting to use alternate WLF file "./wlftv4ky07".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlftv4ky07
 # view structure
 # .main_pane.structure.interior.cs.body.struct
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-# Break key hit
-# Break in Process SYNC at C:/intelFPGA_lite/20.1/quartus/proj/Sorting_Sys/sorting_control.vhd line 61
-# End time: 15:19:18 on May 10,2026, Elapsed time: 0:01:01
-# Errors: 0, Warnings: 0
+# End time: 10:20:10 on May 23,2026, Elapsed time: 0:00:18
+# Errors: 0, Warnings: 3

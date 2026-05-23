@@ -1,0 +1,107 @@
+m255
+K4
+z2
+!s11e vcom 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/simulation/modelsim
+Eautomated_sorting_sys
+Z1 w1779520770
+Z2 DPx8 cyclonev 18 cyclonev_atom_pack 0 22 3HQPc5MVbmOPN?>a5EBYj2
+Z3 DPx8 cyclonev 19 cyclonev_components 0 22 jZ]H46BQLgIP5mfRTO`3B1
+Z4 DPx12 altera_lnsim 23 altera_lnsim_components 0 22 ^Ch;U@;bMk1;>A2B<UV`k2
+Z5 DPx4 ieee 16 vital_primitives 0 22 G>kiXP8Q9dRClKfK1Zn7j1
+Z6 DPx6 altera 11 dffeas_pack 0 22 dc5N=DKXMMTVYdUQ@D3FA2
+Z7 DPx4 ieee 12 vital_timing 0 22 J>EBealN09f8GzldA[z2>3
+Z8 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z9 DPx4 ieee 14 std_logic_1164 0 22 cVAk:aDinOX8^VGI1ekP<3
+Z10 DPx6 altera 28 altera_primitives_components 0 22 ca:ehlQAg4;_gVV:^8MAg3
+!i122 0
+R0
+Z11 8Sorting_Sys.vho
+Z12 FSorting_Sys.vho
+l0
+L39 1
+V2mbaEdBi]@ilN[6[>]`:F3
+!s100 g4K5nzhPWIJP^USSG<9;V2
+Z13 OV;C;2020.1;71
+31
+Z14 !s110 1779520791
+!i10b 1
+Z15 !s108 1779520790.000000
+Z16 !s90 -reportprogress|300|-93|-work|work|Sorting_Sys.vho|
+Z17 !s107 Sorting_Sys.vho|
+!i113 1
+Z18 o-93 -work work
+Z19 tExplicit 1 CvgOpt 0
+Astructure
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+R9
+R10
+DEx4 work 21 automated_sorting_sys 0 22 2mbaEdBi]@ilN[6[>]`:F3
+!i122 0
+l171
+L79 1068
+VF17eZOiccT@XeZ8>J8E2:2
+!s100 Z`mnPm7ELl]J:Db9HO[[H1
+R13
+31
+R14
+!i10b 1
+R15
+R16
+R17
+!i113 1
+R18
+R19
+Eautomated_sorting_sys_tb
+Z20 w1779435009
+R8
+R9
+!i122 1
+R0
+Z21 8C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd
+Z22 FC:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd
+l0
+L12 1
+V_98MP4kJlDE@GBbPnI8CJ0
+!s100 ;0afF:F[>W7?b]3ZIRndj0
+R13
+31
+R14
+!i10b 1
+Z23 !s108 1779520791.000000
+Z24 !s90 -reportprogress|300|-93|-work|work|C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd|
+!s107 C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd|
+!i113 1
+R18
+R19
+Abehavior
+R8
+R9
+DEx4 work 24 automated_sorting_sys_tb 0 22 _98MP4kJlDE@GBbPnI8CJ0
+!i122 1
+l52
+L15 250
+Vn<g`i118FD9:dT1a3i^a_3
+!s100 48f]S_bhHkWDg>nC88XIU2
+R13
+31
+R14
+!i10b 1
+R23
+R24
+Z25 !s107 C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd|
+!i113 1
+R18
+R19

@@ -32,7 +32,7 @@ ARCHITECTURE behavior of sorting_control_TB IS
 	SIGNAL S_enable_sort  : std_logic;
 	SIGNAL S_count_en     : std_logic;
 	
-	constant clk_period : time := 20 ns;
+	CONSTANT clk_period : time := 20 ns;
 	
 BEGIN
 	DUT: sorting_control

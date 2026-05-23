@@ -1,5 +1,5 @@
 
-State Machine - |sorting_control|cur_state
+State Machine - |automated_sorting_sys|sorting_control:u_sorting_control|cur_state
 Name cur_state.WAIT_CLEAR cur_state.SORT cur_state.CHECK cur_state.IDLE 
 cur_state.IDLE 0 0 0 0 
 cur_state.CHECK 0 0 1 1 

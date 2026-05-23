@@ -1,24 +1,105 @@
 Info: Start Nativelink Simulation process
-Info: NativeLink has detected VHDL design -- VHDL simulation models will be used
 
 ========= EDA Simulation Settings =====================
 
-Sim Mode              :  RTL
+Sim Mode              :  Gate
 Family                :  cyclonev
-Quartus root          :  c:/intelfpga_lite/20.1/quartus/bin64/
-Quartus sim root      :  c:/intelfpga_lite/20.1/quartus/eda/sim_lib
+Quartus root          :  d:/intelfpga_lite/20.1/quartus/bin64/
+Quartus sim root      :  d:/intelfpga_lite/20.1/quartus/eda/sim_lib
 Simulation Tool       :  modelsim-altera
 Simulation Language   :  vhdl
 Version               :  93
 Simulation Mode       :  GUI
-Sim Output File       :  
-Sim SDF file          :  
+Sim Output File       :  Sorting_Sys.vho
+Sim SDF file          :  Sorting_Sys__vhdl.sdo
 Sim dir               :  simulation\modelsim
 
 =======================================================
 
 Info: Starting NativeLink simulation with ModelSim-Altera software
-Sourced NativeLink script c:/intelfpga_lite/20.1/quartus/common/tcl/internal/nativelink/modelsim.tcl
-Warning: File Sorting_Sys_run_msim_rtl_vhdl.do already exists - backing up current file as Sorting_Sys_run_msim_rtl_vhdl.do.bak6
-Info: Spawning ModelSim-Altera Simulation software 
+Sourced NativeLink script d:/intelfpga_lite/20.1/quartus/common/tcl/internal/nativelink/modelsim.tcl
+Warning: File Sorting_Sys_run_msim_gate_vhdl.do already exists - backing up current file as Sorting_Sys_run_msim_gate_vhdl.do.bak11
+Probing transcript
+ModelSim-Altera Info: # Reading pref.tcl
+ModelSim-Altera Info: # do Sorting_Sys_run_msim_gate_vhdl.do
+ModelSim-Altera Info: # if {[file exists gate_work]} {
+ModelSim-Altera Info: # 	vdel -lib gate_work -all
+ModelSim-Altera Info: # }
+ModelSim-Altera Info: # vlib gate_work
+ModelSim-Altera Info: # vmap work gate_work
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vmap 2020.1 Lib Mapping Utility 2020.02 Feb 28 2020
+ModelSim-Altera Info: # vmap work gate_work 
+ModelSim-Altera Info: # Copying D:/intelFPGA_lite/20.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
+ModelSim-Altera Info: # Modifying modelsim.ini
+ModelSim-Altera Info: # 
+ModelSim-Altera Info: # vcom -93 -work work {Sorting_Sys.vho}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 10:19:50 on May 23,2026
+ModelSim-Altera Info: # vcom -reportprogress 300 -93 -work work Sorting_Sys.vho 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Loading package VITAL_Timing
+ModelSim-Altera Info: # -- Loading package VITAL_Primitives
+ModelSim-Altera Info: # -- Loading package dffeas_pack
+ModelSim-Altera Info: # -- Loading package altera_primitives_components
+ModelSim-Altera Info: # -- Loading package altera_lnsim_components
+ModelSim-Altera Info: # -- Loading package cyclonev_atom_pack
+ModelSim-Altera Info: # -- Loading package cyclonev_components
+ModelSim-Altera Info: # -- Compiling entity automated_sorting_sys
+ModelSim-Altera Info: # -- Compiling architecture structure of automated_sorting_sys
+ModelSim-Altera Info: # End time: 10:19:51 on May 23,2026, Elapsed time: 0:00:01
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: # 
+ModelSim-Altera Info: # vcom -93 -work work {C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd}
+ModelSim-Altera Info: # Model Technology ModelSim - Intel FPGA Edition vcom 2020.1 Compiler 2020.02 Feb 28 2020
+ModelSim-Altera Info: # Start time: 10:19:51 on May 23,2026
+ModelSim-Altera Info: # vcom -reportprogress 300 -93 -work work C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd 
+ModelSim-Altera Info: # -- Loading package STANDARD
+ModelSim-Altera Info: # -- Loading package TEXTIO
+ModelSim-Altera Info: # -- Loading package std_logic_1164
+ModelSim-Altera Info: # -- Compiling entity automated_sorting_sys_TB
+ModelSim-Altera Info: # -- Compiling architecture behavior of automated_sorting_sys_TB
+ModelSim-Altera Info: # End time: 10:19:51 on May 23,2026, Elapsed time: 0:00:00
+ModelSim-Altera Info: # Errors: 0, Warnings: 0
+ModelSim-Altera Info: # 
+ModelSim-Altera Info: # vsim -t 1ps -L altera -L altera_lnsim -L cyclonev -L gate_work -L work -voptargs="+acc"  automated_sorting_sys_TB
+ModelSim-Altera Info: # vsim -t 1ps -L altera -L altera_lnsim -L cyclonev -L gate_work -L work -voptargs=""+acc"" automated_sorting_sys_TB 
+ModelSim-Altera Info: # Start time: 10:19:52 on May 23,2026
+ModelSim-Altera Info: # Loading std.standard
+ModelSim-Altera Info: # Loading std.textio(body)
+ModelSim-Altera Info: # Loading ieee.std_logic_1164(body)
+ModelSim-Altera Info: # Loading work.automated_sorting_sys_tb(behavior)
+ModelSim-Altera Info: # Loading ieee.vital_timing(body)
+ModelSim-Altera Info: # Loading ieee.vital_primitives(body)
+ModelSim-Altera Info: # Loading altera.dffeas_pack
+ModelSim-Altera Info: # Loading altera.altera_primitives_components
+ModelSim-Altera Info: # Loading altera_lnsim.altera_lnsim_components
+ModelSim-Altera Info: # Loading cyclonev.cyclonev_atom_pack(body)
+ModelSim-Altera Info: # Loading cyclonev.cyclonev_components
+ModelSim-Altera Info: # Loading work.automated_sorting_sys(structure)
+ModelSim-Altera Warning: # ** Warning: (vsim-8713) Suspect default binding for component instance 'DUT'.
+ModelSim-Altera Info: # Entity has no generics at all; the component has generic:
+ModelSim-Altera Info: #           N
+ModelSim-Altera Info: #    Time: 0 ps  Iteration: 0  Instance: /automated_sorting_sys_tb/DUT File: C:/Users/Tomer Rotman/Desktop/New folder/embedded-systems-course/Sorting_Sys/automated_sorting_sys_TB.vhd Line: 70
+ModelSim-Altera Info: # Loading ieee.std_logic_arith(body)
+ModelSim-Altera Info: # Loading cyclonev.cyclonev_io_obuf(arch)
+ModelSim-Altera Info: # Loading cyclonev.cyclonev_io_ibuf(arch)
+ModelSim-Altera Info: # Loading cyclonev.cyclonev_clkena(behavior)
+ModelSim-Altera Info: # Loading altera.dffeas(vital_dffeas)
+ModelSim-Altera Info: # Loading cyclonev.cyclonev_lcell_comb(vital_lcell_comb)
+ModelSim-Altera Info: # 
+ModelSim-Altera Info: # add wave *
+ModelSim-Altera Warning: # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+ModelSim-Altera Info: #           File in use by: Tomer Rotman  Hostname: TOMERPC  ProcessID: 6376
+ModelSim-Altera Info: #           Attempting to use alternate WLF file "./wlftv4ky07".
+ModelSim-Altera Warning: # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+ModelSim-Altera Info: #           Using alternate file: ./wlftv4ky07
+ModelSim-Altera Info: # view structure
+ModelSim-Altera Info: # .main_pane.structure.interior.cs.body.struct
+ModelSim-Altera Info: # view signals
+ModelSim-Altera Info: # .main_pane.objects.interior.cs.body.tree
+ModelSim-Altera Info: # run -all
+ModelSim-Altera Info: # End time: 10:20:10 on May 23,2026, Elapsed time: 0:00:18
+ModelSim-Altera Info: # Errors: 0, Warnings: 3
 Info: NativeLink simulation flow was successful

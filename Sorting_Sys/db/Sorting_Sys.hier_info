@@ -1,4 +1,54 @@
-|sorting_control
+|automated_sorting_sys
+clk => sorting_control:u_sorting_control.clk
+clk => item_presence_logic:u_item_presence.clk
+clk => item_counter:u_item_counter.clk
+rst => sorting_control:u_sorting_control.rst
+rst => item_presence_logic:u_item_presence.rst
+rst => item_counter:u_item_counter.rst
+ir_sensor => item_presence_logic:u_item_presence.ir_sensor
+weight_sensor => item_presence_logic:u_item_presence.weight_sensor
+item_type[0] => type_decoder:u_type_decoder.item_type[0]
+item_type[1] => type_decoder:u_type_decoder.item_type[1]
+left_free => path_selector:u_path_selector.left_free
+right_free => path_selector:u_path_selector.right_free
+ir_clean << item_presence_logic:u_item_presence.ir_clean
+weight_clean << item_presence_logic:u_item_presence.weight_clean
+conveyor_on << output_driver:u_output_driver.conveyor_on
+divert_left << output_driver:u_output_driver.divert_left
+divert_right << output_driver:u_output_driver.divert_right
+reject_ack << output_driver:u_output_driver.reject_ack
+item_count[0] << item_counter:u_item_counter.item_count[0]
+item_count[1] << item_counter:u_item_counter.item_count[1]
+item_count[2] << item_counter:u_item_counter.item_count[2]
+item_count[3] << item_counter:u_item_counter.item_count[3]
+
+
+|automated_sorting_sys|type_decoder:u_type_decoder
+item_type[0] => Mux0.IN5
+item_type[0] => Mux1.IN5
+item_type[0] => Mux2.IN5
+item_type[1] => Mux0.IN4
+item_type[1] => Mux1.IN4
+item_type[1] => Mux2.IN4
+target_code[0] <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+target_code[1] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+valid_item <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|automated_sorting_sys|path_selector:u_path_selector
+target_code[0] => Equal0.IN1
+target_code[0] => Equal1.IN1
+target_code[1] => Equal0.IN0
+target_code[1] => Equal1.IN0
+left_free => can_sort.DATAB
+right_free => can_sort.DATAB
+can_sort <= can_sort.DB_MAX_OUTPUT_PORT_TYPE
+go_left <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+go_right <= go_right.DB_MAX_OUTPUT_PORT_TYPE
+go_reject <= go_reject.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|automated_sorting_sys|sorting_control:u_sorting_control
 clk => cur_state~1.DATAIN
 rst => cur_state~3.DATAIN
 item_present => next_state.OUTPUTSELECT
@@ -20,5 +70,77 @@ can_sort => next_state.OUTPUTSELECT
 can_sort => next_state.OUTPUTSELECT
 enable_sort <= enable_sort.DB_MAX_OUTPUT_PORT_TYPE
 count_en <= count_en.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|automated_sorting_sys|item_presence_logic:u_item_presence
+clk => item_present~reg0.CLK
+clk => weight_clean~reg0.CLK
+clk => ir_clean~reg0.CLK
+clk => weight_clean_tmp.CLK
+clk => ir_clean_tmp.CLK
+clk => weight_cnt[0].CLK
+clk => weight_cnt[1].CLK
+clk => ir_cnt[0].CLK
+clk => ir_cnt[1].CLK
+rst => item_present~reg0.ACLR
+rst => weight_clean~reg0.ACLR
+rst => ir_clean~reg0.ACLR
+rst => weight_clean_tmp.ACLR
+rst => ir_clean_tmp.ACLR
+rst => weight_cnt[0].ACLR
+rst => weight_cnt[1].ACLR
+rst => ir_cnt[0].ACLR
+rst => ir_cnt[1].ACLR
+ir_sensor => ir_cnt.OUTPUTSELECT
+ir_sensor => ir_cnt.OUTPUTSELECT
+ir_sensor => ir_clean_tmp.OUTPUTSELECT
+weight_sensor => weight_cnt.OUTPUTSELECT
+weight_sensor => weight_cnt.OUTPUTSELECT
+weight_sensor => weight_clean_tmp.OUTPUTSELECT
+ir_clean <= ir_clean~reg0.DB_MAX_OUTPUT_PORT_TYPE
+weight_clean <= weight_clean~reg0.DB_MAX_OUTPUT_PORT_TYPE
+item_present <= item_present~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|automated_sorting_sys|output_driver:u_output_driver
+enable_sort => Mux0.IN16
+enable_sort => Mux1.IN16
+enable_sort => Mux2.IN16
+enable_sort => Mux3.IN16
+go_left => Mux0.IN17
+go_left => Mux1.IN17
+go_left => Mux2.IN17
+go_left => Mux3.IN17
+go_right => Mux0.IN18
+go_right => Mux1.IN18
+go_right => Mux2.IN18
+go_right => Mux3.IN18
+go_reject => Mux0.IN19
+go_reject => Mux1.IN19
+go_reject => Mux2.IN19
+go_reject => Mux3.IN19
+conveyor_on <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+divert_left <= Mux1.DB_MAX_OUTPUT_PORT_TYPE
+divert_right <= Mux2.DB_MAX_OUTPUT_PORT_TYPE
+reject_ack <= Mux3.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|automated_sorting_sys|item_counter:u_item_counter
+clk => cnt[0].CLK
+clk => cnt[1].CLK
+clk => cnt[2].CLK
+clk => cnt[3].CLK
+rst => cnt.OUTPUTSELECT
+rst => cnt.OUTPUTSELECT
+rst => cnt.OUTPUTSELECT
+rst => cnt.OUTPUTSELECT
+count_en => cnt.OUTPUTSELECT
+count_en => cnt.OUTPUTSELECT
+count_en => cnt.OUTPUTSELECT
+count_en => cnt.OUTPUTSELECT
+item_count[0] <= cnt[0].DB_MAX_OUTPUT_PORT_TYPE
+item_count[1] <= cnt[1].DB_MAX_OUTPUT_PORT_TYPE
+item_count[2] <= cnt[2].DB_MAX_OUTPUT_PORT_TYPE
+item_count[3] <= cnt[3].DB_MAX_OUTPUT_PORT_TYPE
 
 

@@ -1,5 +1,5 @@
 Flow report for Sorting_Sys
-Sun May 10 15:15:49 2026
+Sat May 23 10:19:30 2026
 Quartus Prime Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition
 
 
@@ -41,16 +41,16 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Sun May 10 15:15:49 2026       ;
+; Flow Status                     ; Successful - Sat May 23 10:19:30 2026       ;
 ; Quartus Prime Version           ; 20.1.1 Build 720 11/11/2020 SJ Lite Edition ;
 ; Revision Name                   ; Sorting_Sys                                 ;
-; Top-level Entity Name           ; sorting_control                             ;
+; Top-level Entity Name           ; automated_sorting_sys                       ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CGXFC7C7F23C8                              ;
 ; Timing Models                   ; Final                                       ;
-; Logic utilization (in ALMs)     ; 4 / 56,480 ( < 1 % )                        ;
-; Total registers                 ; 4                                           ;
-; Total pins                      ; 7 / 268 ( 3 % )                             ;
+; Logic utilization (in ALMs)     ; 15 / 56,480 ( < 1 % )                       ;
+; Total registers                 ; 17                                          ;
+; Total pins                      ; 18 / 268 ( 7 % )                            ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0 / 7,024,640 ( 0 % )                       ;
 ; Total DSP Blocks                ; 0 / 156 ( 0 % )                             ;
@@ -68,61 +68,66 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/10/2026 15:14:17 ;
+; Start date & time ; 05/23/2026 10:17:08 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Sorting_Sys         ;
 +-------------------+---------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                    ;
-+--------------------------------------+----------------------------------------+---------------+-----------------+-----------------------------------+
-; Assignment Name                      ; Value                                  ; Default Value ; Entity Name     ; Section Id                        ;
-+--------------------------------------+----------------------------------------+---------------+-----------------+-----------------------------------+
-; COMPILER_SIGNATURE_ID                ; 48599037565464.177841525740296         ; --            ; --              ; --                                ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --              ; sorting_control_TB                ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --              ; output_driver_TB                  ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --              ; item_counter_TB                   ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --              ; type_decoder_TB                   ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --              ; path_selector_TB                  ;
-; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --              ; item_presence_logic_TB            ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --              ; eda_board_design_timing           ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --              ; eda_board_design_boundary_scan    ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --              ; eda_board_design_signal_integrity ;
-; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --              ; eda_board_design_symbol           ;
-; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; item_counter_TB                        ; --            ; --              ; eda_simulation                    ;
-; EDA_OUTPUT_DATA_FORMAT               ; Vhdl                                   ; --            ; --              ; eda_simulation                    ;
-; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (VHDL)                 ; <None>        ; --              ; --                                ;
-; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                        ; --            ; --              ; eda_simulation                    ;
-; EDA_TEST_BENCH_FILE                  ; sorting_control_TB.vhd                 ; --            ; --              ; sorting_control_TB                ;
-; EDA_TEST_BENCH_FILE                  ; output_driver_TB.vhd                   ; --            ; --              ; output_driver_TB                  ;
-; EDA_TEST_BENCH_FILE                  ; item_counter_TB.vhd                    ; --            ; --              ; item_counter_TB                   ;
-; EDA_TEST_BENCH_FILE                  ; type_decoder_TB.vhd                    ; --            ; --              ; type_decoder_TB                   ;
-; EDA_TEST_BENCH_FILE                  ; path_selector_TB.vhd                   ; --            ; --              ; path_selector_TB                  ;
-; EDA_TEST_BENCH_FILE                  ; item_presence_logic_TB.vhd             ; --            ; --              ; item_presence_logic_TB            ;
-; EDA_TEST_BENCH_MODULE_NAME           ; sorting_control_TB                     ; --            ; --              ; sorting_control_TB                ;
-; EDA_TEST_BENCH_MODULE_NAME           ; output_driver_TB                       ; --            ; --              ; output_driver_TB                  ;
-; EDA_TEST_BENCH_MODULE_NAME           ; item_counter_TB                        ; --            ; --              ; item_counter_TB                   ;
-; EDA_TEST_BENCH_MODULE_NAME           ; type_decoder_TB                        ; --            ; --              ; type_decoder_TB                   ;
-; EDA_TEST_BENCH_MODULE_NAME           ; path_selector_TB                       ; --            ; --              ; path_selector_TB                  ;
-; EDA_TEST_BENCH_MODULE_NAME           ; item_presence_logic_TB                 ; --            ; --              ; item_presence_logic_TB            ;
-; EDA_TEST_BENCH_NAME                  ; item_presence_logic_TB                 ; --            ; --              ; eda_simulation                    ;
-; EDA_TEST_BENCH_NAME                  ; type_decoder_TB                        ; --            ; --              ; eda_simulation                    ;
-; EDA_TEST_BENCH_NAME                  ; path_selector_TB                       ; --            ; --              ; eda_simulation                    ;
-; EDA_TEST_BENCH_NAME                  ; output_driver_TB                       ; --            ; --              ; eda_simulation                    ;
-; EDA_TEST_BENCH_NAME                  ; item_counter_TB                        ; --            ; --              ; eda_simulation                    ;
-; EDA_TEST_BENCH_NAME                  ; sorting_control_TB                     ; --            ; --              ; eda_simulation                    ;
-; EDA_TIME_SCALE                       ; 1 ps                                   ; --            ; --              ; eda_simulation                    ;
-; MAX_CORE_JUNCTION_TEMP               ; 85                                     ; --            ; --              ; --                                ;
-; MIN_CORE_JUNCTION_TEMP               ; 0                                      ; --            ; --              ; --                                ;
-; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --            ; sorting_control ; Top                               ;
-; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --            ; sorting_control ; Top                               ;
-; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --            ; sorting_control ; Top                               ;
-; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                    ; --            ; --              ; --                                ;
-; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --              ; --                                ;
-; PROJECT_OUTPUT_DIRECTORY             ; output_files                           ; --            ; --              ; --                                ;
-; TOP_LEVEL_ENTITY                     ; sorting_control                        ; Sorting_Sys   ; --              ; --                                ;
-+--------------------------------------+----------------------------------------+---------------+-----------------+-----------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                          ;
++--------------------------------------+----------------------------------------+---------------+-----------------------+-----------------------------------+
+; Assignment Name                      ; Value                                  ; Default Value ; Entity Name           ; Section Id                        ;
++--------------------------------------+----------------------------------------+---------------+-----------------------+-----------------------------------+
+; COMPILER_SIGNATURE_ID                ; 277375804212845.177952062819948        ; --            ; --                    ; --                                ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; automated_sorting_sys_TB          ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; sorting_control_TB                ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; output_driver_TB                  ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; item_counter_TB                   ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; type_decoder_TB                   ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; path_selector_TB                  ;
+; EDA_DESIGN_INSTANCE_NAME             ; NA                                     ; --            ; --                    ; item_presence_logic_TB            ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --                    ; eda_board_design_timing           ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --                    ; eda_board_design_boundary_scan    ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --                    ; eda_board_design_signal_integrity ;
+; EDA_GENERATE_FUNCTIONAL_NETLIST      ; Off                                    ; --            ; --                    ; eda_board_design_symbol           ;
+; EDA_NATIVELINK_SIMULATION_TEST_BENCH ; automated_sorting_sys_TB               ; --            ; --                    ; eda_simulation                    ;
+; EDA_OUTPUT_DATA_FORMAT               ; Vhdl                                   ; --            ; --                    ; eda_simulation                    ;
+; EDA_RUN_TOOL_AUTOMATICALLY           ; On                                     ; --            ; --                    ; eda_simulation                    ;
+; EDA_SIMULATION_TOOL                  ; ModelSim-Altera (VHDL)                 ; <None>        ; --                    ; --                                ;
+; EDA_TEST_BENCH_ENABLE_STATUS         ; TEST_BENCH_MODE                        ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_FILE                  ; automated_sorting_sys_TB.vhd           ; --            ; --                    ; automated_sorting_sys_TB          ;
+; EDA_TEST_BENCH_FILE                  ; sorting_control_TB.vhd                 ; --            ; --                    ; sorting_control_TB                ;
+; EDA_TEST_BENCH_FILE                  ; output_driver_TB.vhd                   ; --            ; --                    ; output_driver_TB                  ;
+; EDA_TEST_BENCH_FILE                  ; item_counter_TB.vhd                    ; --            ; --                    ; item_counter_TB                   ;
+; EDA_TEST_BENCH_FILE                  ; type_decoder_TB.vhd                    ; --            ; --                    ; type_decoder_TB                   ;
+; EDA_TEST_BENCH_FILE                  ; path_selector_TB.vhd                   ; --            ; --                    ; path_selector_TB                  ;
+; EDA_TEST_BENCH_FILE                  ; item_presence_logic_TB.vhd             ; --            ; --                    ; item_presence_logic_TB            ;
+; EDA_TEST_BENCH_MODULE_NAME           ; automated_sorting_sys_TB               ; --            ; --                    ; automated_sorting_sys_TB          ;
+; EDA_TEST_BENCH_MODULE_NAME           ; sorting_control_TB                     ; --            ; --                    ; sorting_control_TB                ;
+; EDA_TEST_BENCH_MODULE_NAME           ; output_driver_TB                       ; --            ; --                    ; output_driver_TB                  ;
+; EDA_TEST_BENCH_MODULE_NAME           ; item_counter_TB                        ; --            ; --                    ; item_counter_TB                   ;
+; EDA_TEST_BENCH_MODULE_NAME           ; type_decoder_TB                        ; --            ; --                    ; type_decoder_TB                   ;
+; EDA_TEST_BENCH_MODULE_NAME           ; path_selector_TB                       ; --            ; --                    ; path_selector_TB                  ;
+; EDA_TEST_BENCH_MODULE_NAME           ; item_presence_logic_TB                 ; --            ; --                    ; item_presence_logic_TB            ;
+; EDA_TEST_BENCH_NAME                  ; item_presence_logic_TB                 ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_NAME                  ; type_decoder_TB                        ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_NAME                  ; path_selector_TB                       ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_NAME                  ; output_driver_TB                       ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_NAME                  ; item_counter_TB                        ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_NAME                  ; sorting_control_TB                     ; --            ; --                    ; eda_simulation                    ;
+; EDA_TEST_BENCH_NAME                  ; automated_sorting_sys_TB               ; --            ; --                    ; eda_simulation                    ;
+; EDA_TIME_SCALE                       ; 1 ps                                   ; --            ; --                    ; eda_simulation                    ;
+; MAX_CORE_JUNCTION_TEMP               ; 85                                     ; --            ; --                    ; --                                ;
+; MIN_CORE_JUNCTION_TEMP               ; 0                                      ; --            ; --                    ; --                                ;
+; PARTITION_COLOR                      ; -- (Not supported for targeted family) ; --            ; automated_sorting_sys ; Top                               ;
+; PARTITION_FITTER_PRESERVATION_LEVEL  ; -- (Not supported for targeted family) ; --            ; automated_sorting_sys ; Top                               ;
+; PARTITION_NETLIST_TYPE               ; -- (Not supported for targeted family) ; --            ; automated_sorting_sys ; Top                               ;
+; POWER_BOARD_THERMAL_MODEL            ; None (CONSERVATIVE)                    ; --            ; --                    ; --                                ;
+; POWER_PRESET_COOLING_SOLUTION        ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW  ; --            ; --                    ; --                                ;
+; PROJECT_OUTPUT_DIRECTORY             ; output_files                           ; --            ; --                    ; --                                ;
+; TOP_LEVEL_ENTITY                     ; automated_sorting_sys                  ; Sorting_Sys   ; --                    ; --                                ;
++--------------------------------------+----------------------------------------+---------------+-----------------------+-----------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -130,12 +135,12 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:12     ; 1.0                     ; 4910 MB             ; 00:00:29                           ;
-; Fitter               ; 00:00:55     ; 1.0                     ; 7418 MB             ; 00:03:38                           ;
-; Assembler            ; 00:00:09     ; 1.0                     ; 4846 MB             ; 00:00:09                           ;
-; Timing Analyzer      ; 00:00:07     ; 1.0                     ; 5246 MB             ; 00:00:06                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4741 MB             ; 00:00:01                           ;
-; Total                ; 00:01:24     ; --                      ; --                  ; 00:04:23                           ;
+; Analysis & Synthesis ; 00:00:21     ; 1.0                     ; 4851 MB             ; 00:00:33                           ;
+; Fitter               ; 00:01:24     ; 1.0                     ; 6334 MB             ; 00:01:38                           ;
+; Assembler            ; 00:00:17     ; 1.0                     ; 4828 MB             ; 00:00:13                           ;
+; Timing Analyzer      ; 00:00:11     ; 1.0                     ; 5165 MB             ; 00:00:09                           ;
+; EDA Netlist Writer   ; 00:00:03     ; 1.0                     ; 4724 MB             ; 00:00:02                           ;
+; Total                ; 00:02:16     ; --                      ; --                  ; 00:02:35                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -144,11 +149,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; Vivobook         ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; Vivobook         ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; Vivobook         ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; Vivobook         ; Windows 10 ; 10.0       ; x86_64         ;
-; EDA Netlist Writer   ; Vivobook         ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; TomerPC          ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; TomerPC          ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; TomerPC          ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; TomerPC          ; Windows 10 ; 10.0       ; x86_64         ;
+; EDA Netlist Writer   ; TomerPC          ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

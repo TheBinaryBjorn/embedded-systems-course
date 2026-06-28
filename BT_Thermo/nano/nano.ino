@@ -43,7 +43,7 @@ const uint16_t debounceTicks = 50;        // 50 ticks = 50ms
 // 16,000,000 / 64 = 250,000 ticks/sec -> OCR1A = 250-1 = 249 -> 1000Hz
 // ---------------------------------------------------------------------------
 void setupTimer1() {
-  noInterrupts();
+  cli();
   TCCR1A = 0;
   TCCR1B = 0;
   TCNT1  = 0;
@@ -51,7 +51,7 @@ void setupTimer1() {
   TCCR1B |= (1 << WGM12);                // CTC mode (Clear Timer on Compare)
   TCCR1B |= (1 << CS11) | (1 << CS10);   // prescaler 64
   TIMSK1 |= (1 << OCIE1A);               // enable Compare Match A interrupt
-  interrupts();
+  sei();
 }
 
 // Timer1 ISR - runs every 1ms, increments the tick counter
@@ -97,6 +97,9 @@ void loop() {
   updateLedLogic();
 }
 
+// Reads one character from the ESP32 serial link and acts on it:
+// '1'/'0' set ledState in manual mode, 'A'/'M' switch modes,
+// 'T' reads the following integer as a new temperature threshold.
 void handleESPCommands() {
   if (espSerial.available()) {
     char cmd = espSerial.read();
@@ -123,11 +126,14 @@ void handleESPCommands() {
   }
 }
 
+// Every 2000 ticks (2 seconds), reads the DHT11 temperature, shows it on
+// the 7-segment display, and sends it to the ESP32 as "TEMP:<value>".
+// Skips the update (but doesn't retry immediately) if the sensor returns NaN.
 void handleTemperatureAndDisplay() {
   // atomic read of tickCount (shared with the Timer1 ISR)
-  noInterrupts();
+  cli();
   uint32_t now = tickCount;
-  interrupts();
+  sei();
 
   if (now - lastTempReadTick >= tempReadInterval) {
     lastTempReadTick = now;
@@ -155,6 +161,9 @@ void handleTemperatureAndDisplay() {
   }
 }
 
+// Determines the correct LED state based on the current mode:
+// auto -> LED on if temp >= threshold; manual -> LED follows ledState.
+// Writes to the LED pin, and if the state changed, reports it to the ESP32 as "LED:<0|1>".
 void updateLedLogic() {
   bool newState;
 

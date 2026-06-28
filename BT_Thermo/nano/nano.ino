@@ -43,7 +43,7 @@ const uint16_t debounceTicks = 50;        // 50 ticks = 50ms
 // 16,000,000 / 64 = 250,000 ticks/sec -> OCR1A = 250-1 = 249 -> 1000Hz
 // ---------------------------------------------------------------------------
 void setupTimer1() {
-  noInterrupts();
+  cli();
   TCCR1A = 0;
   TCCR1B = 0;
   TCNT1  = 0;
@@ -51,7 +51,7 @@ void setupTimer1() {
   TCCR1B |= (1 << WGM12);                // CTC mode (Clear Timer on Compare)
   TCCR1B |= (1 << CS11) | (1 << CS10);   // prescaler 64
   TIMSK1 |= (1 << OCIE1A);               // enable Compare Match A interrupt
-  interrupts();
+  sei();
 }
 
 // Timer1 ISR - runs every 1ms, increments the tick counter
@@ -125,9 +125,9 @@ void handleESPCommands() {
 
 void handleTemperatureAndDisplay() {
   // atomic read of tickCount (shared with the Timer1 ISR)
-  noInterrupts();
+  cli();
   uint32_t now = tickCount;
-  interrupts();
+  sei();
 
   if (now - lastTempReadTick >= tempReadInterval) {
     lastTempReadTick = now;

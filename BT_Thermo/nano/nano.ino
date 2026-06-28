@@ -97,6 +97,9 @@ void loop() {
   updateLedLogic();
 }
 
+// Reads one character from the ESP32 serial link and acts on it:
+// '1'/'0' set ledState in manual mode, 'A'/'M' switch modes,
+// 'T' reads the following integer as a new temperature threshold.
 void handleESPCommands() {
   if (espSerial.available()) {
     char cmd = espSerial.read();
@@ -123,6 +126,9 @@ void handleESPCommands() {
   }
 }
 
+// Every 2000 ticks (2 seconds), reads the DHT11 temperature, shows it on
+// the 7-segment display, and sends it to the ESP32 as "TEMP:<value>".
+// Skips the update (but doesn't retry immediately) if the sensor returns NaN.
 void handleTemperatureAndDisplay() {
   // atomic read of tickCount (shared with the Timer1 ISR)
   cli();
@@ -155,6 +161,9 @@ void handleTemperatureAndDisplay() {
   }
 }
 
+// Determines the correct LED state based on the current mode:
+// auto -> LED on if temp >= threshold; manual -> LED follows ledState.
+// Writes to the LED pin, and if the state changed, reports it to the ESP32 as "LED:<0|1>".
 void updateLedLogic() {
   bool newState;
 
